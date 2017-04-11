@@ -39,7 +39,7 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Application name
-APPLICATION_NAME = 'rendering-resource-manager'
+APPLICATION_NAME = 'RRM'
 
 # API version
 API_VERSION = 'v1'
@@ -172,7 +172,7 @@ sys.path.append(BASE_DIR)
 sys.path.append(BASE_DIR + '/rendering_resource_manager_service')
 
 # Slurm (To be modified by deployment process)
-SLURM_USERNAME = 'paluchow'
+SLURM_USERNAME = 'tresch'
 SLURM_SSH_KEY = '~/.ssh/cloud_intern.key'
 SLURM_PROJECT = 'proj39'
 SLURM_HOSTS = ['bbplxviz1.epfl.ch']
