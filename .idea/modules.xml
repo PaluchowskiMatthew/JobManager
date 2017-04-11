@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/RRM.iml" filepath="$PROJECT_DIR$/.idea/RRM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../JobManager/.idea/JobManager.iml" filepath="$PROJECT_DIR$/../JobManager/.idea/JobManager.iml" />
     </modules>
   </component>
 </project>

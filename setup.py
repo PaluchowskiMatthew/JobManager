@@ -1,26 +1,3 @@
-#!/usr/bin/env python
-# pylint: disable=R0801,W0122,E0602
-
-# Copyright (c) 2014-2015, Human Brain Project
-#                          Cyrille Favreau <cyrille.favreau@epfl.ch>
-#
-# This file is part of RenderingResourceManager
-#   <https://github.com/BlueBrain/RenderingResourceManager>
-#
-# This library is free software; you can redistribute it and/or modify it under
-# the terms of the GNU Lesser General Public License version 3.0 as published
-# by the Free Software Foundation.
-#
-# This library is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
-# details.
-#
-# You should have received a copy of the GNU Lesser General Public License
-# along with this library; if not, write to the Free Software Foundation, Inc.,
-# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-# All rights reserved. Do not distribute without further notice.
-
 """setup.py"""
 import os
 
@@ -53,19 +30,19 @@ for file_name in os.listdir(BASEDIR):
     extra = extra[len(EXTRA_REQS_PREFIX):]
     EXTRA_REQS[extra] = parse_reqs(file_name)
 
-exec(open('rendering_resource_manager_service/version.py').read())
-setup(name="rendering_resource_manager_service",
+exec(open('job_manager_service/version.py').read())
+setup(name="job_manager_service",
       version=VERSION,
       description="Service in charge of allocating renderers for Visualization WebServices",
 
-      packages=['rendering_resource_manager_service',
-                'rendering_resource_manager_service/admin',
-                'rendering_resource_manager_service/config',
-                'rendering_resource_manager_service/config/management',
-                'rendering_resource_manager_service/service',
-                'rendering_resource_manager_service/session',
-                'rendering_resource_manager_service/session/management',
-                'rendering_resource_manager_service/utils'],
+      packages=['job_manager_service',
+                'job_manager_service/admin',
+                'job_manager_service/config',
+                'job_manager_service/config/management',
+                'job_manager_service/service',
+                'job_manager_service/session',
+                'job_manager_service/session/management',
+                'job_manager_service/utils'],
       url='https://github.com/bluebrain/RenderingResourceManager.git',
       author='Cyrille Favreau',
       author_email='cyrille.favreau@epfl.ch',

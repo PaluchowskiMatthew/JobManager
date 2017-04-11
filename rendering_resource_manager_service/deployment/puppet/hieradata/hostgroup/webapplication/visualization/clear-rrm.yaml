@@ -1,4 +1,0 @@
-nginx::oidc::client_secret: 'TO_BE_MODIFIED'
-vws::secret_key: 'TO_BE_MODIFIED'
-vws::slurm_username: 'TO_BE_MODIFIED'
-vws::client_id: 'TO_BE_MODIFIED'
