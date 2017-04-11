@@ -35,14 +35,14 @@ from threading import Lock
 import json
 import re
 
-import rendering_resource_manager_service.session.management.session_manager_settings as settings
-from rendering_resource_manager_service.config.management import \
+import job_manager_service.session.management.session_manager_settings as settings
+from job_manager_service.config.management import \
     rendering_resource_settings_manager as manager
-import rendering_resource_manager_service.utils.custom_logging as log
-from rendering_resource_manager_service.session.models import \
+import job_manager_service.utils.custom_logging as log
+from job_manager_service.session.models import \
     SESSION_STATUS_STARTING, SESSION_STATUS_RUNNING, \
     SESSION_STATUS_SCHEDULING, SESSION_STATUS_SCHEDULED, SESSION_STATUS_FAILED
-import rendering_resource_manager_service.service.settings as global_settings
+import job_manager_service.service.settings as global_settings
 
 
 SLURM_SSH_COMMAND = '/usr/bin/ssh -i ' + \
@@ -192,16 +192,17 @@ class JobManager(object):
             #     full_command += ' ' + parameter
 
             # Output redirection
-            full_command += ' > ' + 'out.log'#self._file_name(session, settings.SLURM_OUT_FILE)
-            full_command += ' 2> ' + 'err.log'#self._file_name(session, settings.SLURM_ERR_FILE)
-            full_command += ' &\n'
+            full_command += ' > ' + 'out1.log'#self._file_name(session, settings.SLURM_OUT_FILE)
+            full_command += ' 2> ' + 'err1.log'#self._file_name(session, settings.SLURM_ERR_FILE)
+            full_command += ' &'
 
             # Start Process on cluster
             command_line = '/usr/bin/ssh -i ' + \
                            global_settings.SLURM_SSH_KEY + ' -K -Y ' + \
                            global_settings.SLURM_USERNAME + '@' + \
-                           session.cluster_node
-                           #session.http_host
+                           session.http_host
+                           #session.cluster_node
+
 
             log.info(1, 'Connect to cluster machine: ' + command_line)
             process = subprocess.Popen(
@@ -213,7 +214,7 @@ class JobManager(object):
 
             log.info(1, 'Full command:\n' + full_command)
             process.stdin.write(full_command)
-            output = process.communicate()[0]
+            output = process.communicate(input='\n')[0]
             log.info(1,'Full commmand output: ' + output)
             process.stdin.close()
 

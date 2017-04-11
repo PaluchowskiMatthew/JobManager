@@ -31,9 +31,9 @@ user session
 
 from rest_framework import serializers, viewsets
 from django.http import HttpResponse
-from rendering_resource_manager_service import utils as consts
-from rendering_resource_manager_service.session.models import Session
-import rendering_resource_manager_service.session.management.session_manager as session_manager
+from job_manager_service import utils as consts
+from job_manager_service.session.models import Session
+import job_manager_service.session.management.session_manager as session_manager
 
 
 class AdminSerializer(serializers.ModelSerializer):

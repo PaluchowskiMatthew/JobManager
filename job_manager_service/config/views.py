@@ -31,7 +31,7 @@ user sessions
 from rest_framework import serializers, viewsets
 from django.http import HttpResponse
 from models import RenderingResourceSettings
-from rendering_resource_manager_service.config.management import \
+from job_manager_service.config.management import \
     rendering_resource_settings_manager
 
 

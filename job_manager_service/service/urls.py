@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=W0403
 # pylint: disable=F0401
+# pylint: disable=E1101
 
 # Copyright (c) 2014-2015, Human Brain Project
 #                          Cyrille Favreau <cyrille.favreau@epfl.ch>
@@ -27,29 +28,26 @@
 Defines application URLs
 """
 
-from django.conf.urls import patterns, url
-from rendering_resource_manager_service.session.views import \
-    SessionViewSet, CommandViewSet, SessionDetailsViewSet
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.contrib import admin
+from django.conf.urls import patterns, include, url
+import rest_framework_swagger.urls
+import job_manager_service.service.settings as settings
+import job_manager_service.admin.urls
+import job_manager_service.config.urls
+import job_manager_service.session.urls
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-session_list = SessionViewSet.as_view({
-    'post': 'create_session',
-    'delete': 'destroy_session',
-    'get': 'list_sessions',
-})
-session_details = SessionDetailsViewSet.as_view({
-    'get': 'get_session',
-})
-session_command = CommandViewSet.as_view({
-    'get': 'execute',
-    'put': 'execute',
-})
+admin.autodiscover()
 
 urlpatterns = patterns(
-    '',
-    url(r'/session/$', session_list),
-    url(r'/session/(?P<pk>[a-zA-Z0-9]+)/$', session_details),
-    url(r'/session/(?P<command>[a-zA-Z0-9]+)', session_command),
+    r'',
+    url(settings.BASE_URL_PREFIX + r'/config.json$',
+        'job_manager_service.service.views.config'),
+    url(settings.BASE_URL_PREFIX + r'/api-docs', include(rest_framework_swagger.urls)),
+    url(settings.BASE_URL_PREFIX + r'/admin', include(admin.site.urls)),
+    url(settings.BASE_URL_PREFIX, include(job_manager_service.admin.urls)),
+    url(settings.BASE_URL_PREFIX, include(job_manager_service.config.urls)),
+    url(settings.BASE_URL_PREFIX, include(job_manager_service.session.urls)),
 )
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns += staticfiles_urlpatterns()

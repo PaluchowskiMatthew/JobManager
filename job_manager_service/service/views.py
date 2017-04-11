@@ -21,9 +21,27 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 # All rights reserved. Do not distribute without further notice.
 
-""" Rendering Resource Manager """
+"""
+This modules allows integration of this application into the HBP collab
+"""
 
-# Needed by unit testing
-import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                      'rendering_resource_manager_service.service.settings')
+from django.http import HttpResponse
+import json
+import requests
+from job_manager_service.service.settings import SOCIAL_AUTH_HBP_KEY
+
+HBP_ENV_URL = 'https://collab.humanbrainproject.eu/config.json'
+
+
+# pylint: disable=W0613
+def config(request):
+    '''Render the config file'''
+
+    r = requests.get(url=HBP_ENV_URL)
+    json_response = json.loads(r.text)
+    r.close()
+
+    # Use this app client ID
+    json_response['auth']['clientId'] = SOCIAL_AUTH_HBP_KEY
+
+    return HttpResponse(json.dumps(json_response), content_type='application/json')

@@ -32,8 +32,8 @@ import time
 import datetime
 
 from django.db import transaction
-import rendering_resource_manager_service.utils.custom_logging as log
-from rendering_resource_manager_service.session.models import SESSION_STATUS_STOPPING
+import job_manager_service.utils.custom_logging as log
+from job_manager_service.session.models import SESSION_STATUS_STOPPING
 import job_manager
 import process_manager
 

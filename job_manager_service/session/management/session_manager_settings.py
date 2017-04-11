@@ -22,26 +22,43 @@
 # All rights reserved. Do not distribute without further notice.
 
 """
-This modules allows integration of this application into the HBP collab
+This module contains the global constants for the rendering resource manager
 """
 
-from django.http import HttpResponse
-import json
-import requests
-from rendering_resource_manager_service.service.settings import SOCIAL_AUTH_HBP_KEY
-
-HBP_ENV_URL = 'https://collab.humanbrainproject.eu/config.json'
+import job_manager_service.service.settings as global_settings
 
 
-# pylint: disable=W0613
-def config(request):
-    '''Render the config file'''
+# HTTP Cookie ID
+COOKIE_ID = "HBP"
 
-    r = requests.get(url=HBP_ENV_URL)
-    json_response = json.loads(r.text)
-    r.close()
+# Logging level
+LOGGING_LEVEL = 3
 
-    # Use this app client ID
-    json_response['auth']['clientId'] = SOCIAL_AUTH_HBP_KEY
+# Default values
+DEFAULT_RENDERER_HTTP_PORT = 3000
+DEFAULT_RENDERER_HOST = 'localhost'
 
-    return HttpResponse(json.dumps(json_response), content_type='application/json')
+# REST
+REST_VERB_POST = 'POST'
+REST_VERB_GET = 'GET'
+REST_VERB_PUT = 'PUT'
+REST_VERB_DELETE = 'DELETE'
+REST_VERB_PATCH = 'PATCH'
+
+# Command line arguments
+REQUEST_ARGUMENT_METHOD = "method"
+REQUEST_ARGUMENT_COMMAND = "command"
+REQUEST_ARGUMENT_RENDERER = "renderer"
+REQUEST_ARGUMENT_PARAMS = "parameters"
+
+# SLURM
+SLURM_OUTPUT_PREFIX = '/gpfs/bbp.cscs.ch/home/' + global_settings.SLURM_USERNAME +\
+                      '/var/log/vws'
+SLURM_ERR_FILE = 'err.log'
+SLURM_OUT_FILE = 'out.log'
+SLURM_ALLOCATION_TIMEOUT = 30
+
+# Session management
+RRM_SPECIFIC_COMMAND_KEEPALIVE = 'keepalive'
+RRM_SPECIFIC_COMMAND_RESUME = 'resume'
+RRM_SPECIFIC_COMMAND_SUSPEND = 'suspend'

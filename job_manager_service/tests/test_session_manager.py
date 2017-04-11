@@ -23,9 +23,9 @@
 
 from django.test import TestCase
 from nose import tools as nt
-import rendering_resource_manager_service.utils.custom_logging as log
-from rendering_resource_manager_service.session.views import SessionDetailsSerializer
-from rendering_resource_manager_service.session.management.session_manager import SessionManager
+import job_manager_service.utils.custom_logging as log
+from job_manager_service.session.views import SessionDetailsSerializer
+from job_manager_service.session.management.session_manager import SessionManager
 import json
 
 DEFAULT_USER = 'testuser'

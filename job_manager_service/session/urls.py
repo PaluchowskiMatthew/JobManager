@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# pylint: disable=W0403
+# pylint: disable=F0401
 
 # Copyright (c) 2014-2015, Human Brain Project
 #                          Cyrille Favreau <cyrille.favreau@epfl.ch>
@@ -22,17 +24,32 @@
 # All rights reserved. Do not distribute without further notice.
 
 """
-Main Program
+Defines application URLs
 """
 
-import sys
-import os
+from django.conf.urls import patterns, url
+from job_manager_service.session.views import \
+    SessionViewSet, CommandViewSet, SessionDetailsViewSet
+from rest_framework.urlpatterns import format_suffix_patterns
 
-if __name__ == '__main__':
+session_list = SessionViewSet.as_view({
+    'post': 'create_session',
+    'delete': 'destroy_session',
+    'get': 'list_sessions',
+})
+session_details = SessionDetailsViewSet.as_view({
+    'get': 'get_session',
+})
+session_command = CommandViewSet.as_view({
+    'get': 'execute',
+    'put': 'execute',
+})
 
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                          'rendering_resource_manager_service.service.settings')
+urlpatterns = patterns(
+    '',
+    url(r'/session/$', session_list),
+    url(r'/session/(?P<pk>[a-zA-Z0-9]+)/$', session_details),
+    url(r'/session/(?P<command>[a-zA-Z0-9]+)', session_command),
+)
 
-    from django.core.management import execute_from_command_line
-
-    execute_from_command_line(sys.argv)
+urlpatterns = format_suffix_patterns(urlpatterns)

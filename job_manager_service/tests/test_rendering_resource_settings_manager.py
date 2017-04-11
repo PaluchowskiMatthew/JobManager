@@ -23,10 +23,10 @@
 
 from django.test import TestCase
 from nose import tools as nt
-import rendering_resource_manager_service.utils.custom_logging as log
-from rendering_resource_manager_service.config.management.rendering_resource_settings_manager \
+import job_manager_service.utils.custom_logging as log
+from job_manager_service.config.management.rendering_resource_settings_manager \
     import RenderingResourceSettingsManager
-from rendering_resource_manager_service.config.views import \
+from job_manager_service.config.views import \
     RenderingResourceSettingsSerializer
 
 

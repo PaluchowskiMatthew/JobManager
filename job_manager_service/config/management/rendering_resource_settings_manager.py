@@ -29,8 +29,8 @@ application name, executable name and command line parameters,
 and ensures persistent storage in a database
 """
 
-from rendering_resource_manager_service.config.models import RenderingResourceSettings
-import rendering_resource_manager_service.utils.custom_logging as log
+from job_manager_service.config.models import RenderingResourceSettings
+import job_manager_service.utils.custom_logging as log
 import rest_framework.status as http_status
 from django.db import IntegrityError, transaction
 from rest_framework.renderers import JSONRenderer

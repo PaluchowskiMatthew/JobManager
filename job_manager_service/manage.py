@@ -22,43 +22,17 @@
 # All rights reserved. Do not distribute without further notice.
 
 """
-This module contains the global constants for the rendering resource manager
+Main Program
 """
 
-import rendering_resource_manager_service.service.settings as global_settings
+import sys
+import os
 
+if __name__ == '__main__':
 
-# HTTP Cookie ID
-COOKIE_ID = "HBP"
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                          'job_manager_service.service.settings')
 
-# Logging level
-LOGGING_LEVEL = 3
+    from django.core.management import execute_from_command_line
 
-# Default values
-DEFAULT_RENDERER_HTTP_PORT = 3000
-DEFAULT_RENDERER_HOST = 'localhost'
-
-# REST
-REST_VERB_POST = 'POST'
-REST_VERB_GET = 'GET'
-REST_VERB_PUT = 'PUT'
-REST_VERB_DELETE = 'DELETE'
-REST_VERB_PATCH = 'PATCH'
-
-# Command line arguments
-REQUEST_ARGUMENT_METHOD = "method"
-REQUEST_ARGUMENT_COMMAND = "command"
-REQUEST_ARGUMENT_RENDERER = "renderer"
-REQUEST_ARGUMENT_PARAMS = "parameters"
-
-# SLURM
-SLURM_OUTPUT_PREFIX = '/gpfs/bbp.cscs.ch/home/' + global_settings.SLURM_USERNAME +\
-                      '/var/log/vws'
-SLURM_ERR_FILE = 'err.log'
-SLURM_OUT_FILE = 'out.log'
-SLURM_ALLOCATION_TIMEOUT = 30
-
-# Session management
-RRM_SPECIFIC_COMMAND_KEEPALIVE = 'keepalive'
-RRM_SPECIFIC_COMMAND_RESUME = 'resume'
-RRM_SPECIFIC_COMMAND_SUSPEND = 'suspend'
+    execute_from_command_line(sys.argv)

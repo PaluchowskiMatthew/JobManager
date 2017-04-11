@@ -53,19 +53,19 @@ for file_name in os.listdir(BASEDIR):
     extra = extra[len(EXTRA_REQS_PREFIX):]
     EXTRA_REQS[extra] = parse_reqs(file_name)
 
-exec(open('rendering_resource_manager_service/version.py').read())
-setup(name="rendering_resource_manager_service",
+exec(open('job_manager_service/version.py').read())
+setup(name="job_manager_service",
       version=VERSION,
       description="Service in charge of allocating renderers for Visualization WebServices",
 
-      packages=['rendering_resource_manager_service',
-                'rendering_resource_manager_service/admin',
-                'rendering_resource_manager_service/config',
-                'rendering_resource_manager_service/config/management',
-                'rendering_resource_manager_service/service',
-                'rendering_resource_manager_service/session',
-                'rendering_resource_manager_service/session/management',
-                'rendering_resource_manager_service/utils'],
+      packages=['job_manager_service',
+                'job_manager_service/admin',
+                'job_manager_service/config',
+                'job_manager_service/config/management',
+                'job_manager_service/service',
+                'job_manager_service/session',
+                'job_manager_service/session/management',
+                'job_manager_service/utils'],
       url='https://github.com/bluebrain/RenderingResourceManager.git',
       author='Cyrille Favreau',
       author_email='cyrille.favreau@epfl.ch',

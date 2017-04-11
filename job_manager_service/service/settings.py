@@ -22,7 +22,7 @@
 # All rights reserved. Do not distribute without further notice.
 
 """
-Django settings for rendering_resource_manager_service project.
+Django settings for job_manager_service project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -102,9 +102,9 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 
-ROOT_URLCONF = 'rendering_resource_manager_service.service.urls'
+ROOT_URLCONF = 'job_manager_service.service.urls'
 
-WSGI_APPLICATION = 'rendering_resource_manager_service.service.wsgi.application'
+WSGI_APPLICATION = 'job_manager_service.service.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/config/#databases
@@ -169,7 +169,7 @@ BASE_URL_PREFIX = r'^' + APPLICATION_NAME + '/' + API_VERSION
 
 # Needed by unit testing
 sys.path.append(BASE_DIR)
-sys.path.append(BASE_DIR + '/rendering_resource_manager_service')
+sys.path.append(BASE_DIR + '/job_manager_service')
 
 # Slurm (To be modified by deployment process)
 SLURM_USERNAME = 'paluchow'

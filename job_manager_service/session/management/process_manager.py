@@ -33,11 +33,11 @@ import subprocess
 import urllib2
 import json
 
-import rendering_resource_manager_service.utils.custom_logging as log
-from rendering_resource_manager_service.config.management import \
+import job_manager_service.utils.custom_logging as log
+from job_manager_service.config.management import \
     rendering_resource_settings_manager as manager
-from rendering_resource_manager_service.session.models import SESSION_STATUS_STARTING
-from rendering_resource_manager_service.config.models import RenderingResourceSettings
+from job_manager_service.session.models import SESSION_STATUS_STARTING
+from job_manager_service.config.models import RenderingResourceSettings
 import os
 
 
