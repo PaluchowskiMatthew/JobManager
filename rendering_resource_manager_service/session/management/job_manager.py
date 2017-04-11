@@ -315,22 +315,6 @@ class JobManager(object):
         """
         return self._query(session)
 
-    def rendering_resource_out_log(self, session):
-        """
-        Returns the contents of the rendering resource output file
-        :param session: Current user session
-        :return: A string containing the output log
-        """
-        return self._rendering_resource_log(session, settings.SLURM_OUT_FILE)
-
-    def rendering_resource_err_log(self, session):
-        """
-        Returns the contents of the rendering resource error file
-        :param session: Current user session
-        :return: A string containing the error log
-        """
-        return self._rendering_resource_log(session, settings.SLURM_ERR_FILE)
-
     @staticmethod
     def _query(session, attribute=None):
         """
@@ -370,33 +354,6 @@ class JobManager(object):
         """
         return settings.SLURM_OUTPUT_PREFIX + '_' + str(session.job_id) + \
                '_' + session.renderer_id + '_' + extension
-
-    def _rendering_resource_log(self, session, extension):
-        """
-        Returns the contents of the specified file
-        :param session: Current user session
-        :param extension: File extension (typically err or out)
-        :return: A string containing the log
-        """
-        try:
-            result = 'Not currently available'
-            if session.status in [SESSION_STATUS_STARTING, SESSION_STATUS_RUNNING]:
-                filename = self._file_name(session, extension)
-                command_line = SLURM_SSH_COMMAND + session.cluster_node + \
-                               ' cat ' + filename
-                log.info(1, 'Querying log: ' + command_line)
-                process = subprocess.Popen(
-                    [command_line],
-                    shell=True,
-                    stdin=subprocess.PIPE,
-                    stdout=subprocess.PIPE)
-                output = process.communicate()[0]
-                result = output
-            return result
-        except OSError as e:
-            return str(e)
-        except IOError as e:
-            return str(e)
 
     @staticmethod
     def _build_allocation_command(session, job_information):

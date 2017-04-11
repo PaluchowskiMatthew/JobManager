@@ -62,7 +62,3 @@ SLURM_ALLOCATION_TIMEOUT = 30
 RRM_SPECIFIC_COMMAND_KEEPALIVE = 'keepalive'
 RRM_SPECIFIC_COMMAND_RESUME = 'resume'
 RRM_SPECIFIC_COMMAND_SUSPEND = 'suspend'
-
-# Rendering resource commands
-RR_SPECIFIC_COMMAND_VOCABULARY = 'zerobuf/render/fovcamera'
-RR_SPECIFIC_COMMAND_EXIT = 'zerobuf/render/exit'
